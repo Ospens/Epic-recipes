@@ -1,10 +1,14 @@
 angular
     .module('app', ['ui.router', 'templates'])
-    .config(['$stateProvider', '$urlRouterProvider',
-    function($stateProvider, $urlRouterProvider) {
+    .config(['$stateProvider', '$locationProvider',
+    function($stateProvider, $locationProvider) {
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false
+        });
         $stateProvider
         .state('home', {
-            url: '/home',
+            url: '/',
             templateUrl: 'html/_home.html',
             controller: 'MainCtrl'
         })
@@ -14,5 +18,5 @@ angular
             templateUrl: 'html/_sports.html',
             controller: 'MainCtrl'
         })
-        $urlRouterProvider.otherwise('home');
-    }])
+        // $locationProvider.otherwise('home');
+    }]);
