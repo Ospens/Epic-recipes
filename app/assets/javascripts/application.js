@@ -13,6 +13,11 @@
 //= require rails-ujs
 //= require turbolinks
 //= require angular
+//= require angular-resource
 //= require angular-rails-templates
 //= require angular-ui-router
+//= require angular-route
+//= require angular-bootstrap
 //= require_tree .
+//= require jquery
+//= require bootstrap-sprockets

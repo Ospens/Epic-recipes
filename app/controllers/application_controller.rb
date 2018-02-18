@@ -4,5 +4,9 @@ class ApplicationController < ActionController::Base
   def home
     render 'layouts/application'
   end
+
+  def sports
+    render 'layouts/application'
+  end
   
 end
