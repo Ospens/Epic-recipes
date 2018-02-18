@@ -8,5 +8,9 @@ class ApplicationController < ActionController::Base
   def sports
     render 'layouts/application'
   end
+
+  def registration
+    render 'layouts/application'
+  end
   
 end

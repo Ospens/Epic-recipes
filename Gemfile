@@ -34,6 +34,7 @@ gem 'angular-ui-bootstrap-rails'
 gem 'angular-rails-templates'
 gem 'bootstrap-sass', '~> 3.3.7'
 gem 'jquery-rails'
+gem 'devise'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

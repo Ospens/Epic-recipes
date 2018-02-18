@@ -14,6 +14,11 @@ angular
             templateUrl: 'html/_sports.html',
             controller: 'MainCtrl'
         })
+        .state('registration', {
+            url: '/registration',
+            templateUrl: 'html/registration.html',
+            controller: 'MainCtrl'
+        })
         $urlRouterProvider.otherwise('/');
     }])
 
@@ -37,4 +42,14 @@ angular
         $scope.closeAlert = function(index) {
             $scope.alerts.splice(index, 1);
         };
-    });
+    })
+
+    .controller('Registration', function($scope) {
+        
+        $scope.test = function() {
+            // console.log($scope.data.login);            
+            // console.log($scope.data.pass);
+        }
+
+        // console.log($scope);
+    })
