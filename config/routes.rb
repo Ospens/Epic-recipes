@@ -5,9 +5,9 @@ Rails.application.routes.draw do
 
   get "sports" => "application#sports"
 
-  get "register" => "application#register"
+  get "register" => "authorization#register"
 
-  get "login" => "application#login"
+  get "login" => "authorization#login"
   
 
 end

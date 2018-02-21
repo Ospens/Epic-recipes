@@ -19,9 +19,11 @@ angular
             templateUrl: 'auth/login.html',
             controller: 'AuthCtrl',
             onEnter: ['$state', 'Auth', function($state, Auth) {
-                Auth.currentUser().then(function (){
-                  $state.go('home');
-                })
+                if (Auth.isAuthenticated()) {
+                    Auth.currentUser().then(function (){
+                    $state.go('home');
+                    })
+                }
             }]
         })
           .state('register', {
@@ -29,9 +31,11 @@ angular
             templateUrl: 'auth/register.html',
             controller: 'AuthCtrl',
             onEnter: ['$state', 'Auth', function($state, Auth) {
-                Auth.currentUser().then(function (){
-                  $state.go('home');
-                })
+                if (Auth.isAuthenticated()) {
+                    Auth.currentUser().then(function (){
+                    $state.go('home');
+                    })
+                }
             }]
         })
         $urlRouterProvider.otherwise('/');
@@ -88,27 +92,4 @@ angular
           });
     })
 
-    .controller('AuthCtrl', ['$scope', '$state', 'Auth',
-        function($scope, $state, Auth) {
-
-            $scope.login = function() {
-                Auth.login($scope.user).then(function(){
-                  $state.go('home');
-                });
-            };
-            
-              $scope.register = function() {
-                  console.log($scope.user);
-                Auth.register($scope.user).then(function(){
-                  $state.go('home');
-                });
-                console.log(Auth.isAuthenticated());
-                
-              };
-
-
-        $scope.check = function() {
-            console.log(Auth.isAuthenticated());
-        };
-           
-        }]);
+    
