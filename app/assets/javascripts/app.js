@@ -1,5 +1,5 @@
 angular
-    .module('app', ['ui.router', 'templates', 'ui.bootstrap'])
+    .module('app', ['ui.router', 'templates', 'ui.bootstrap', 'Devise'])
     .config(['$stateProvider', '$locationProvider', '$urlRouterProvider',
     function($stateProvider, $locationProvider, $urlRouterProvider) {
         $locationProvider.html5Mode(true);
@@ -14,14 +14,29 @@ angular
             templateUrl: 'html/_sports.html',
             controller: 'MainCtrl'
         })
-        .state('registration', {
-            url: '/registration',
-            templateUrl: 'html/registration.html',
-            controller: 'MainCtrl'
+        .state('login', {
+            url: '/login',
+            templateUrl: 'auth/login.html',
+            controller: 'AuthCtrl',
+            onEnter: ['$state', 'Auth', function($state, Auth) {
+                Auth.currentUser().then(function (){
+                  $state.go('home');
+                })
+            }]
+        })
+          .state('register', {
+            url: '/register',
+            templateUrl: 'auth/register.html',
+            controller: 'AuthCtrl',
+            onEnter: ['$state', 'Auth', function($state, Auth) {
+                Auth.currentUser().then(function (){
+                  $state.go('home');
+                })
+            }]
         })
         $urlRouterProvider.otherwise('/');
     }])
-
+    
     .controller('AlertDemoCtrl', function($scope) {
         $scope.alerts = [{
                 type: 'danger',
@@ -39,17 +54,61 @@ angular
             });
         };
     
+        
+
         $scope.closeAlert = function(index) {
             $scope.alerts.splice(index, 1);
         };
     })
 
-    .controller('Registration', function($scope) {
-        
-        $scope.test = function() {
-            // console.log($scope.data.login);            
-            // console.log($scope.data.pass);
-        }
 
-        // console.log($scope);
+    .controller('NavCtrl', function($scope, Auth) {
+        $scope.signedIn = Auth.isAuthenticated;
+        $scope.logout = Auth.logout;
+        if (Auth._currentUser) {
+            Auth.currentUser().then(function(user) {
+                // User was logged in, or Devise returned
+                // previously authenticated session.
+                console.log(Auth.isAuthenticated());
+                console.log(user); // => {id: 1, ect: '...'}
+            }, function(error) {
+                console.log('asdasd');
+            });
+        }
+        $scope.$on('devise:new-registration', function (e, user){
+            $scope.user = user;
+          });
+        
+          $scope.$on('devise:login', function (e, user){
+            $scope.user = user;
+          });
+        
+          $scope.$on('devise:logout', function (e, user){
+            $scope.user = {};
+          });
     })
+
+    .controller('AuthCtrl', ['$scope', '$state', 'Auth',
+        function($scope, $state, Auth) {
+
+            $scope.login = function() {
+                Auth.login($scope.user).then(function(){
+                  $state.go('home');
+                });
+            };
+            
+              $scope.register = function() {
+                  console.log($scope.user);
+                Auth.register($scope.user).then(function(){
+                  $state.go('home');
+                });
+                console.log(Auth.isAuthenticated());
+                
+              };
+
+
+        $scope.check = function() {
+            console.log(Auth.isAuthenticated());
+        };
+           
+        }]);
