@@ -7,7 +7,14 @@ angular
         .state('home', {
             url: '/',
             templateUrl: 'html/_home.html',
-            controller: 'MainCtrl'
+            controller: 'MainCtrl',
+            onEnter: ['$state', 'Auth', function($state, Auth) {
+                if (Auth.isAuthenticated()) {
+                    Auth.currentUser().then(function (){
+                    $state.go('home');
+                    })
+                }
+            }]
         })
         .state('sports', {
             url: '/sports',
@@ -68,7 +75,7 @@ angular
 
     .controller('NavCtrl', function($scope, Auth) {
         $scope.signedIn = Auth.isAuthenticated;
-        $scope.logout = Auth.logout;
+        // $scope.logout = Auth.logout;
         if (Auth._currentUser) {
             Auth.currentUser().then(function(user) {
                 // User was logged in, or Devise returned

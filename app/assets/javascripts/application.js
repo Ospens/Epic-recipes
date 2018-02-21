@@ -15,9 +15,9 @@
 //= require angular
 //= require AngularDevise
 //= require angular-resource
+//= require angular-material
 //= require angular-rails-templates
 //= require angular-ui-router
-//= require angular-route
 //= require angular-bootstrap
 //= require_tree .
 //= require jquery
