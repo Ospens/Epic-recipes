@@ -6,7 +6,7 @@ angular
         $stateProvider
         .state('home', {
             url: '/',
-            templateUrl: 'html/_home.html',
+            templateUrl: 'views/_home.html',
             controller: 'MainCtrl',
             onEnter: ['$state', 'Auth', function($state, Auth) {
                 if (Auth.isAuthenticated()) {
@@ -18,12 +18,12 @@ angular
         })
         .state('sports', {
             url: '/sports',
-            templateUrl: 'html/_sports.html',
+            templateUrl: 'views/_sports.html',
             controller: 'MainCtrl'
         })
         .state('login', {
             url: '/login',
-            templateUrl: 'auth/login.html',
+            templateUrl: 'views/auth/login.html',
             controller: 'AuthCtrl',
             onEnter: ['$state', 'Auth', function($state, Auth) {
                 if (Auth.isAuthenticated()) {
@@ -33,9 +33,9 @@ angular
                 }
             }]
         })
-          .state('register', {
+        .state('register', {
             url: '/register',
-            templateUrl: 'auth/register.html',
+            templateUrl: 'views/auth/register.html',
             controller: 'AuthCtrl',
             onEnter: ['$state', 'Auth', function($state, Auth) {
                 if (Auth.isAuthenticated()) {
@@ -43,8 +43,8 @@ angular
                     $state.go('home');
                     })
                 }
-            }]
-        })
+        }]
+    })
         $urlRouterProvider.otherwise('/');
     }])
     
@@ -70,33 +70,6 @@ angular
         $scope.closeAlert = function(index) {
             $scope.alerts.splice(index, 1);
         };
-    })
-
-
-    .controller('NavCtrl', function($scope, Auth) {
-        $scope.signedIn = Auth.isAuthenticated;
-        // $scope.logout = Auth.logout;
-        if (Auth._currentUser) {
-            Auth.currentUser().then(function(user) {
-                // User was logged in, or Devise returned
-                // previously authenticated session.
-                console.log(Auth.isAuthenticated());
-                console.log(user); // => {id: 1, ect: '...'}
-            }, function(error) {
-                console.log('asdasd');
-            });
-        }
-        $scope.$on('devise:new-registration', function (e, user){
-            $scope.user = user;
-          });
-        
-          $scope.$on('devise:login', function (e, user){
-            $scope.user = user;
-          });
-        
-          $scope.$on('devise:logout', function (e, user){
-            $scope.user = {};
-          });
     })
 
     
