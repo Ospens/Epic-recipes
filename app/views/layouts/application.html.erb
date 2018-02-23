@@ -1,19 +1,50 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>EpicRecipes</title>
     <%= csrf_meta_tags %>
     <base href="/">
-    <%= stylesheet_link_tag    'application', media: 'all'%>
-    <%= javascript_include_tag 'application' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'home' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body ng-app="app">
-  
-  <div class="col-md-6 col-md-offset-3">
-    <nav-bar></nav-bar>
-    <ui-view></ui-view>
-  </div>
+      
+    <div class='header'>
+          <ul>
+            <li>
+                <a>
+                    <div>
+                      <img class='logo' src='assets/logo.png'>
+                    </div>
+                </a>
+            </li>
+
+            <li>
+                <div>
+                    <input id="searchText" type="text" placeholder=" Find a recipe">
+                </div>
+            </li>
+
+            <li>
+                <a href="">
+                    <div class="nav-search">
+                        <span>
+                          <img alt="search" height="23" src="https://images.media-allrecipes.com/ar-images/icons/NavSearchIcon.svg" width="23">
+                        </span>
+                    </div>
+                </a>
+            </li>
+          </ul>
+
+          <div class='sign'>
+            <nav-bar></nav-bar>
+          </div> 
+
+    </div>
+    <div class='content'>
+      <ui-view></ui-view> 
+    </div>
 
   </body>
 </html>
