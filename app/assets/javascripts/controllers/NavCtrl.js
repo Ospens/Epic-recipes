@@ -3,13 +3,19 @@ angular
     .controller('NavCtrl', function($scope, $rootScope, Auth){
         $scope.signedIn = Auth.isAuthenticated;
         $scope.logout = Auth.logout;
+
+  
+        // if (Auth._currentUser) {
+            // console.log(user);
         
-        if (Auth.isAuthenticated()) { 
+
+            console.log($scope.user);
+            
             Auth.currentUser().then(function(user) {
                 $rootScope.user = user;
                 }, function(errorResponse) {
             });
-        }
+        // }
 
         $scope.$on('devise:new-registration', function (e, user){
             $rootScope.user = user;
