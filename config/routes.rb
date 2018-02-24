@@ -4,8 +4,6 @@ Rails.application.routes.draw do
   
   root 'application#home'
 
-  get "sports" => "application#sports"
-
   get "register" => "authorization#register"
 
   get "login" => "authorization#login"

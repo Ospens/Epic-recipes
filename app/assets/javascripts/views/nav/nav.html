@@ -1,4 +1,4 @@
-<div><a class='btn btn-link' href="/">Home</a></div>
+<div class='btn-nav' ng-hide="signedIn()"><a class='btn btn-info link-nav' href="/">Home</a></div>
 <div class='btn-nav' ng-hide="signedIn()"><a class='btn btn-warning link-nav' href="/login">Log In</a></div>
 <div class='btn-nav' ng-hide="signedIn()"><a class='btn btn-warning link-nav' href="/register">Register</a></div>
 <div class='btn-nav' ng-show="signedIn()"><a class='btn btn-warning link-nav' ng-click="logout()">Log Out</a></div>

@@ -16,9 +16,6 @@ class ApplicationController < ActionController::Base
     render 'layouts/application'
   end
 
-  def sports
-    render 'layouts/application'
-  end
 
   protected
       def configure_permitted_parameters

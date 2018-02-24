@@ -11,7 +11,6 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require turbolinks
 //= require angular
 //= require AngularDevise
 //= require angular-resource

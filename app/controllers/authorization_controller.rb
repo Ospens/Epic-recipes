@@ -1,7 +1,7 @@
 class AuthorizationController < ApplicationController
 
-  # protect_from_forgery prepend: :exception
-  protect_from_forgery prepend: true
+  protect_from_forgery with: :exception
+  # protect_from_forgery prepend: true
 
   respond_to :json
 
